@@ -1,20 +1,16 @@
 <x-layout>
-    
-    {{-- Menampilkan pesan status dari session --}}
     @if (session('status'))
         <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
             {{ session('status') }}
         </div>
     @endif
     
-    {{-- Header Halaman dan Tombol Tambah --}}
     <div class="flex justify-between items-center my-6">
         <button type="button" data-modal-toggle="create-modal" class="px-4 py-2 bg-amber-600 text-white font-semibold rounded-lg shadow-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:ring-opacity-75">
             Tambah Tugas
         </button>
     </div>
     
-    {{-- Daftar Kartu Tugas --}}
     <div class="space-y-4">
         @forelse ($todos as $todo)
             <x-card :todo="$todo" />
@@ -23,7 +19,6 @@
         @endforelse
     </div>
     
-    {{-- MODAL UNTUK CREATE TUGAS BARU --}}
     <div id="create-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-gray-900 bg-opacity-50 flex justify-center items-center">
         <div class="relative w-full max-w-md max-h-full">
             <div class="relative bg-white rounded-lg shadow">

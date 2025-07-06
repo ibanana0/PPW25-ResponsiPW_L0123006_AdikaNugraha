@@ -14,7 +14,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // --- BUNGKUS SEMUA ROUTE TODO DI SINI ---
     // routes/web.php
     Route::get('/', [TodoController::class, 'index'])
         ->middleware(['auth', 'verified'])
@@ -24,6 +23,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         return redirect()->route('home');
     })->middleware(['auth', 'verified'])->name('dashboard');
+
     Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
     Route::patch('/todos/{todo}/toggle', [TodoController::class, 'toggleComplete'])->name('todos.toggle');
     Route::put('/todos/{todo}', [TodoController::class, 'update'])->name('todos.update');
