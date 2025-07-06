@@ -10,12 +10,22 @@
         <header class="text-center font-bold text-4xl">
             <h1 class="">Responsi 2 Pemograman Web</h1>
             <h2 class="">My To Do List</h2>
+            @auth
+                <div class="text-right text-sm">
+                    <span>Selamat datang, {{ Auth::user()->name }}</span>
+                    
+                    <!-- Tombol Logout -->
+                    <form method="POST" action="{{ route('logout') }}" class="inline ml-4">
+                        @csrf
+                        <button type="submit" class="underline">Logout</button>
+                    </form>
+                </div>
+            @endauth
         </header>
         <main>
             {{$slot}}
         </main>
         
-        {{-- SCRIPT YANG LEBIH SEDERHANA --}}
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const body = document.body;
@@ -44,7 +54,6 @@
                     }
                 }
 
-                // --- EVENT LISTENER UNTUK MEMBUKA/TUTUP MODAL ---
                 body.addEventListener('click', function(event) {
                     // Menangani pembukaan modal
                     const toggleButton = event.target.closest('[data-modal-toggle]');
@@ -63,14 +72,12 @@
                     }
                 });
 
-                // --- EVENT LISTENER UNTUK TOGGLE CHECKBOX (DENGAN PERBAIKAN) ---
                 body.addEventListener('change', async function(event) {
                     if (!event.target.matches('.todo-checkbox')) return;
 
                     const checkbox = event.target;
                     const form = checkbox.closest('form');
 
-                    // Nonaktifkan checkbox untuk mencegah klik ganda
                     checkbox.disabled = true;
 
                     try {
